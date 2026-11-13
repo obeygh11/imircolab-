@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071b2b">
+<title>iMicroLab — Your Laboratory in Your Pocket</title>
+<style>
+:root{--navy:#071b2b;--panel:#102b3d;--panel2:#16384b;--cyan:#42d9e8;--mint:#8cf0d1;--white:#f3fbff;--muted:#a8bfca;--line:#29495b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#071b2b,#091f30 55%,#061723);color:var(--white);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+.wrap{max-width:760px;margin:auto;padding:env(safe-area-inset-top) 16px 36px}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 2px 16px}
+.brand{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#36d7e7,#79efc8);display:grid;place-items:center;color:#062031;font-size:24px;font-weight:800}
+h1{font-size:21px;margin:0;letter-spacing:.2px}.tag{font-size:11px;color:var(--muted);margin-top:3px}.status{font-size:11px;color:var(--mint);border:1px solid #286b67;padding:7px 9px;border-radius:20px}
+.hero{padding:23px 20px;border:1px solid #255064;border-radius:23px;background:radial-gradient(circle at 95% 5%,#1c6170 0,transparent 38%),linear-gradient(135deg,#12364a,#0d293b);margin:8px 0 22px}
+.eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mint);font-weight:700}
+.hero h2{font-size:27px;line-height:1.13;margin:10px 0}.hero p{color:#c2d5df;line-height:1.5;font-size:14px;margin:0 0 17px}
+.primary{border:0;border-radius:13px;background:linear-gradient(90deg,var(--cyan),var(--mint));color:#062031;font-weight:800;padding:13px 17px;font-size:14px;cursor:pointer}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;margin:20px 2px 12px}.sectionhead h3{margin:0;font-size:17px}.sectionhead span{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.tile{background:linear-gradient(145deg,#143449,#0e293b);border:1px solid var(--line);border-radius:17px;padding:15px;min-height:130px;cursor:pointer;text-align:left;color:var(--white)}
+.tile:active{transform:scale(.985)}.ico{font-size:25px;margin-bottom:10px}.tile strong{display:block;font-size:14px;margin-bottom:5px}.tile small{display:block;color:var(--muted);font-size:11px;line-height:1.4}
+.card{background:#0d2739;border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.card h3{font-size:16px;margin:0 0 7px}.card p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}
+#capture{display:none}.preview{display:none;width:100%;max-height:300px;object-fit:contain;border-radius:13px;margin-top:13px;background:#061723}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.secondary{background:#18394c;color:var(--white);border:1px solid #376074;border-radius:12px;padding:11px 13px;font-weight:650;font-size:13px}
+.note{font-size:11px!important;color:#9fb8c5!important;margin-top:11px!important}
+footer{text-align:center;color:#7895a4;font-size:10px;padding:24px 5px 5px}
+.panel{display:none}.panel.active{display:block}.back{background:none;border:0;color:var(--cyan);font-size:13px;padding:8px 0;cursor:pointer}
+.field{width:100%;background:#071d2c;border:1px solid #35586b;border-radius:11px;padding:12px;color:white;margin:8px 0 12px;font-size:14px}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.tile{min-height:150px}.hero h2{font-size:34px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand"><div class="logo">μ</div><div><h1>iMicroLab</h1><div class="tag">YOUR LABORATORY. IN YOUR POCKET.</div></div></div>
+  <div class="status">● PHONE-ONLY BETA</div>
+</header>
+
+<main id="home" class="panel active">
+  <section class="hero">
+    <div class="eyebrow">Welcome to your digital lab</div>
+    <h2>Look closer.<br>Learn more.</h2>
+    <p>Capture samples, organize observations and build a useful record of your feed and poultry checks — right from your iPhone.</p>
+    <button class="primary" onclick="openCapture()">＋ Capture a sample</button>
+  </section>
+
+  <div class="sectionhead"><h3>Laboratory modules</h3><span>Choose an area</span></div>
+  <div class="grid">
+    <button class="tile" onclick="showModule('feed')"><div class="ico">🌽</div><strong>Feed inspection</strong><small>Grains, ingredients, visible mould and particles</small></button>
+    <button class="tile" onclick="showModule('poultry')"><div class="ico">🐔</div><strong>Poultry health</strong><small>Record visible signs and sample observations</small></button>
+    <button class="tile" onclick="showModule('micro')"><div class="ico">🦠</div><strong>Microorganisms</strong><small>Learning library and microscopy notes</small></button>
+    <button class="tile" onclick="showModule('general')"><div class="ico">🔬</div><strong>General microscopy</strong><small>Image records, magnification and measurements</small></button>
+  </div>
+
+  <section class="card">
+    <h3>📷 Sample camera</h3>
+    <p>Use your iPhone camera to photograph a sample. This first version stores a temporary preview in this page; it does not diagnose disease or measure protein, energy or bacteria.</p>
+    <div class="actions"><button class="secondary" onclick="openCapture()">Open camera / choose photo</button></div>
+    <input id="capture" type="file" accept="image/*" capture="environment" onchange="previewImage(event)">
+    <img id="preview" class="preview" alt="Selected sample preview">
+    <p id="photoStatus" class="note" aria-live="polite"></p>
+  </section>
+
+  <section class="card">
+    <h3>⚠️ Scientific note</h3>
+    <p>An ordinary iPhone camera cannot resolve bacteria, viruses or individual cells. Digital zoom enlarges pixels; it does not replace a real microscope. AI observations must be treated as unconfirmed until checked with appropriate laboratory methods.</p>
+  </section>
+</main>
+
+<section id="module" class="panel">
+  <button class="back" onclick="goHome()">← Back to dashboard</button>
+  <div class="hero" style="margin-top:8px"><div class="eyebrow" id="moduleEyebrow">LAB MODULE</div><h2 id="moduleTitle">Module</h2><p id="moduleDesc"></p></div>
+  <div class="card"><h3>New observation</h3><label for="sampleName" class="tag">Sample name or reference</label><input class="field" id="sampleName" placeholder="e.g. maize batch 01"><label for="observation" class="tag">What can you see?</label><textarea class="field" id="observation" rows="4" placeholder="Describe only what is visible."></textarea><button class="primary" onclick="saveObservation()">Save observation on this device</button><p class="note">Saved only in this browser on this device. Do not enter private patient or customer information.</p></div>
+  <div class="card"><h3>Observations saved here</h3><div id="savedList"><p>No observations saved yet.</p></div></div>
+</section>
+
+<footer>iMicroLab • Early prototype • Not a medical or veterinary diagnostic device</footer>
+</div>
+<script>
+const descriptions={
+ feed:["FEED INSPECTION","Feed & ingredients","Record the appearance of maize, soya, concentrates and other ingredients. A photograph cannot establish crude protein, metabolizable energy, toxins or nutritional composition; those require suitable tests."],
+ poultry:["POULTRY HEALTH","Poultry sample records","Record visible signs, sample type and observations for discussion with a qualified poultry veterinarian or diagnostic laboratory. Photos alone cannot confirm infection or prescribe treatment."],
+ micro:["MICROORGANISM LIBRARY","Microbiology learning","Explore microscopy concepts and keep learning notes. Bacteria, viruses and many cells cannot be reliably seen with an ordinary phone camera."],
+ general:["GENERAL MICROSCOPY","Microscopy workspace","Prepare image records and notes. A compatible optical microscope and calibrated imaging setup will be needed for genuine microscopic measurements."]
+};
+let currentModule="feed";
+function openCapture(){document.getElementById('capture').click()}
+function previewImage(e){const f=e.target.files&&e.target.files[0];if(!f)return;const img=document.getElementById('preview');img.src=URL.createObjectURL(f);img.style.display='block';document.getElementById('photoStatus').textContent='Photo loaded for visual reference. No automated diagnosis has been performed.'}
+function showModule(id){currentModule=id;const d=descriptions[id];document.getElementById('moduleEyebrow').textContent=d[0];document.getElementById('moduleTitle').textContent=d[1];document.getElementById('moduleDesc').textContent=d[2];document.getElementById('home').classList.remove('active');document.getElementById('module').classList.add('active');renderSaved()}
+function goHome(){document.getElementById('module').classList.remove('active');document.getElementById('home').classList.add('active')}
+function getSaved(){try{return JSON.parse(localStorage.getItem('imicrolab_notes')||'[]')}catch(e){return []}}
+function saveObservation(){const name=document.getElementById('sampleName').value.trim();const note=document.getElementById('observation').value.trim();if(!name&&!note){alert('Please enter a sample name or observation.');return}const all=getSaved();all.unshift({module:currentModule,name:name||'Unnamed sample',note:note||'No observation entered',date:new Date().toLocaleString()});try{localStorage.setItem('imicrolab_notes',JSON.stringify(all));document.getElementById('sampleName').value='';document.getElementById('observation').value='';renderSaved();alert('Observation saved on this device.')}catch(e){alert('Could not save. Device storage may be full or unavailable.')}}
+function renderSaved(){const el=document.getElementById('savedList');const all=getSaved().filter(x=>x.module===currentModule);if(!all.length){el.innerHTML='<p class="note">No observations saved yet.</p>';return}el.innerHTML=all.map(x=>'<div style="border-top:1px solid #29495b;padding:10px 0"><strong>'+escapeHtml(x.name)+'</strong><p class="note">'+escapeHtml(x.date)+'</p><p>'+escapeHtml(x.note)+'</p></div>').join('')}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+</script>
+</body>
+</html>
